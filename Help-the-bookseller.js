@@ -39,11 +39,11 @@ Notes:
 // Solution
 
 function stockList(listOfArt, listOfCat) {
-  var qs = {};
+  let qs = {};
   if (!listOfArt.length) return '';
 
   listOfArt.forEach(function(art) {
-    var cat = art[0];
+    let cat = art[0];
     qs[cat] = (qs[cat] | 0) + +art.split(' ')[1];
   });
 
@@ -53,3 +53,11 @@ function stockList(listOfArt, listOfCat) {
 }
 
 // or
+
+function stockList(listOfArt, listOfCat) {
+  if (!listOfArt.length || !listOfCat.length) return ''
+  return listOfCat.map(w => {
+    const s = listOfArt.reduce((a, b) => a + (b.charAt(0) === w ? +b.split(' ')[1] : 0), 0)
+    return `(${w} : ${s})`
+  }).join(' - ')
+}
